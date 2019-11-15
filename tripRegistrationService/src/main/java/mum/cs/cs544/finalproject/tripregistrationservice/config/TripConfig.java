@@ -1,4 +1,12 @@
 package mum.cs.cs544.finalproject.tripregistrationservice.config;
 
-public class TripConfig {
+import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+
+public class TripConfig  extends AbstractCassandraConfiguration {
+    public  static  final String KEYSPACE= "tripregistrationdb";
+    @Override
+    protected String getKeyspaceName() {
+        return KEYSPACE;
+
+    }
 }

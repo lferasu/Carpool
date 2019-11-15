@@ -1,20 +1,29 @@
 package mum.cs.cs544.finalproject.tripregistrationservice.model;
 
+import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 import java.time.LocalDateTime;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table("trips")
+
 public class Trip {
-    private Address PickupPlace;
-    private Address DropOffPlace;
+    @PrimaryKey
+    @CassandraType(type = DataType.Name.UUID)
+    private String  PickupPlace;
+    private String  DropOffPlace;
     private LocalDateTime tripStartingTime;
     private LocalDateTime tripEndTime;
     private  Vehicle vehicle;
-    private User user;
+    private User driver;
     private boolean isRoundTrip;
     private Integer numberOfAvailableSeats;
     private Double tripPrice;
