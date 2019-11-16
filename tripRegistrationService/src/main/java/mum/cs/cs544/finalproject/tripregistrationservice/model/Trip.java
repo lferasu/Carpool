@@ -27,5 +27,6 @@ public class Trip {
     private Double tripPrice;
     private String tripDescription;
     private UUID userId;
+    private UUID vehicleId;
 
 }
