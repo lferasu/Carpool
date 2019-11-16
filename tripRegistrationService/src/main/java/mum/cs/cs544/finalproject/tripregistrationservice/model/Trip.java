@@ -10,7 +10,6 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +27,5 @@ public class Trip {
     private Double tripPrice;
     private String tripDescription;
     private UUID userId;
-
 
 }

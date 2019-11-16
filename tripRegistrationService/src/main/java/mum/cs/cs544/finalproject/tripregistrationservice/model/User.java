@@ -10,7 +10,6 @@ import java.util.UUID;
 @Data
 @Table
 public class User {
-
     @PrimaryKey
     private UUID id;
     //User is to be accessed from the User registration service
