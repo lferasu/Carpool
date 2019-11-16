@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.cassandra.core.CassandraAdminTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class TripServiceImpl implements  TripService{
 
@@ -14,21 +18,25 @@ public class TripServiceImpl implements  TripService{
     private TripRepository tripRepository;
 
     @Override
-    public void  saveTrip(Trip trip) {
-        tripRepository.save(trip);
+    public Trip  saveTrip(Trip trip) {
+        return tripRepository.save(trip);
     }
 
-   /* @Override
+
+
+    @Override
     public List<Trip> getAllTrips() {
         List<Trip> trips= new ArrayList<>();
-        tripRepo.findAll().forEach(trips::add);
+        tripRepository.findAll().forEach(trips::add);
         return trips;
-    }*/
+    }
 
-   /* @Override
+
+
+    @Override
     public Trip getTripById(UUID id) {
-        return  tripRepo.findById(id).get();
-    }*/
+        return  tripRepository.findById(id).get();
+    }
 
 
 }

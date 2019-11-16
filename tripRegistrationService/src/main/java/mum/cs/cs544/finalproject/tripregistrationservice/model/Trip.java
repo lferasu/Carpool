@@ -1,5 +1,4 @@
 package mum.cs.cs544.finalproject.tripregistrationservice.model;
-
 import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,15 +17,12 @@ public class Trip {
     @PrimaryKey
     @CassandraType(type = DataType.Name.UUID)
     private UUID id;
-    private String  PickupPlace;
-    private String  DropOffPlace;
+    private String pickupPlace;
+    private String dropOffPlace;
     private LocalDateTime tripStartingTime;
     private LocalDateTime tripEndTime;
     private boolean isRoundTrip;
     private Integer numberOfAvailableSeats;
     private Double tripPrice;
     private String tripDescription;
-    private UUID userId;
-    private UUID vehicleId;
-
 }

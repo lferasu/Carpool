@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 @Service
 public interface TripService {
-    void  saveTrip(Trip trip);
-  // List<Trip> getAllTrips();
-   // Trip getTripById(UUID id);
+    Trip  saveTrip(Trip trip);
+    List<Trip> getAllTrips();
+    Trip getTripById(UUID id);
 
 }
