@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("trips")
+@Table(value = "trips")
 public class Trip {
     @PrimaryKey
     @CassandraType(type = DataType.Name.UUID)
