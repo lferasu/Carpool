@@ -1,29 +1,31 @@
 package mum.cs.cs544.finalproject.tripregistrationservice.controller;
-import com.datastax.driver.core.utils.UUIDs;
 import mum.cs.cs544.finalproject.tripregistrationservice.model.Trip;
-import mum.cs.cs544.finalproject.tripregistrationservice.model.User;
-import mum.cs.cs544.finalproject.tripregistrationservice.service.TripService;
+import mum.cs.cs544.finalproject.tripregistrationservice.model.SearchTripKafka;
+import mum.cs.cs544.finalproject.tripregistrationservice.model.TripRegistrationTable;
+
+import mum.cs.cs544.finalproject.tripregistrationservice.service.TripRegistrationTableService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import javax.xml.bind.ValidationException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/trip")
 public class TripController {
 
+    static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+
     @Autowired
-    private TripService tripService;
+    private TripRegistrationTableService tripRegistrationTableService;
 
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    KafkaTemplate<String, Trip> kafkaTemplate;
     private static  final String Topic="registredTrip";
 
     @GetMapping("/info")
@@ -32,33 +34,54 @@ public class TripController {
     }
 
 
-    @PostMapping("/register")
-    public  Trip  registerTrip(@RequestBody  Trip trip) throws ValidationException {
+    @PostMapping("/register/{driverId}")
+    public  Trip registerTrip(@PathVariable("driverId") long driverId, @RequestBody Trip trip) throws ValidationException {
+    TripRegistrationTable tr=tripRegistrationTableService.registrationTableMapper(driverId, trip);
 
+    TripRegistrationTable savedtr=tripRegistrationTableService.saveTrip(tr);
 
-        if(trip==null)
-            throw  new ValidationException("Trip should be not Null");
+    Trip registredTrip=tripRegistrationTableService.tripMapper(savedtr);
+    //SearchTripKafka sk=new SearchTripKafka(registredTrip);
 
-        trip.setId(UUIDs.timeBased());
+    tripRegistrationTableService.publishTrip(registredTrip);
+    //SearchTripKafka data = new SearchTripKafka(trip);
+    tripRegistrationTableService.publishTripKafka(new SearchTripKafka(registredTrip));
+    return registredTrip ;
 
-        kafkaTemplate.send(Topic,trip);
-       return tripService.saveTrip(trip);
     }
 
 
 
-    @GetMapping("/byID/{tripId}")
-    public Trip  getTripById(@PathVariable ("tripId")UUID id){
-            return tripService.getTripById(id);
-}
 
-@GetMapping("/alltrip")
-    public List<Trip> getAllTrip(){
-return  tripService.getAllTrips();
-}
+/*
+    @PostMapping("/register{driverId}")
+    public  TripRegistrationTable  registerTrip(@PathVariable ("driverId")long driverId) throws ValidationException {
 
-    @GetMapping("/getdriver")
-    public User getDriver(){
-    return  restTemplate.getForObject("http://registration-service/user/getuser", User.class);
+        TripRegistrationTable tr=tripRegistrationTableService.registrationTableMapper(driverId, trip);
+
+        Trip registredTrip=tripRegistrationTableService.tripMapper(tr);
+
+        tripRegistrationTableService.publishTrip(registredTrip);
+        tripRegistrationTableService.publishTripKafka(new SearchTripKafka(registredTrip));
+
+        return tripRegistrationTableService.saveTrip(tr);
+
     }
+*/
+
+
+
+
+
+    /*  @PostMapping("updatereserv")
+    public  TripRegistrationTable updateRegistration(){
+        TripRegistrationTable tr= tripRegistrationTableService.registrationTableMapper();
+
+    }
+*/
+    @GetMapping("/alltrip")
+    public List<TripRegistrationTable> getAllTrip(){
+return  tripRegistrationTableService.getAllRegTrips();
+}
+
 }
