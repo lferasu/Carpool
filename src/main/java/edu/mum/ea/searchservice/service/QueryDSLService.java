@@ -91,7 +91,7 @@ public class QueryDSLService {
         LocalDate present = LocalDate.now();
         int todayNumber = present.getDayOfMonth();
         BoolQueryBuilder query = QueryBuilders.boolQuery()
-                                    .must(QueryBuilders.rangeQuery("numberOfAvilableSeats").gte(numberOfAvilableSeats-1))
+                                    .must(QueryBuilders.rangeQuery("numberOfAvilableSeats").gte(numberOfAvilableSeats))
                                     .must(QueryBuilders.rangeQuery("numberDate").gte(todayNumber))
                                     .must(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("dropOffPlace", dropOffPlace)));
          NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(query).build();

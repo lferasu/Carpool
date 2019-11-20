@@ -6,7 +6,8 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName="carpool",type="tripdata")
+//@Document(indexName="carpool",type="tripdata")
+@Document(indexName="tripdata",type="trip")
 public class Trip implements Serializable{
 
     /**

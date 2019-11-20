@@ -7,7 +7,7 @@ public class SearchForm {
 
     private String from; 
     private String to;
-    private LocalDateTime date;
+    private String date;
     private Integer noOfSeats;
     private Double priceRangeFrom;
     private Double priceRangeUntil;
@@ -17,7 +17,7 @@ public class SearchForm {
     }
 
 
-    public SearchForm(String from, String to, LocalDateTime date, Integer noOfSeats, Double priceRangeFrom, Double priceRangeUntil) {
+    public SearchForm(String from, String to, String date, Integer noOfSeats, Double priceRangeFrom, Double priceRangeUntil) {
         this.from = from;
         this.to = to;
         this.date = date;
@@ -43,11 +43,11 @@ public class SearchForm {
         this.to = to;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return this.date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

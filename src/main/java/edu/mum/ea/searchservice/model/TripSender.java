@@ -7,8 +7,8 @@ public class TripSender {
     private long id;
     private String pickupPlace;
     private String dropOffPlace;
-    private LocalDateTime tripStartingTime;
-    private LocalDateTime tripEndTime;
+    private String tripStartingTime;
+    private String tripEndTime;
     private boolean isRoundTrip;
     private Integer numberOfAvailableSeats;
     private int requestedReserveSeat;
@@ -24,7 +24,7 @@ public class TripSender {
 
     
 
-    public TripSender(long id, String pickupPlace, String dropOffPlace, LocalDateTime tripStartingTime, LocalDateTime tripEndTime, boolean isRoundTrip, Integer numberOfAvailableSeats, int requestedReserveSeat, Double tripPrice, String tripDescription, User driver, Reservation reservation) {
+    public TripSender(long id, String pickupPlace, String dropOffPlace, String tripStartingTime, String tripEndTime, boolean isRoundTrip, Integer numberOfAvailableSeats, int requestedReserveSeat, Double tripPrice, String tripDescription, User driver, Reservation reservation) {
         this.id = id;
         this.pickupPlace = pickupPlace;
         this.dropOffPlace = dropOffPlace;
@@ -63,19 +63,19 @@ public class TripSender {
         this.dropOffPlace = dropOffPlace;
     }
 
-    public LocalDateTime getTripStartingTime() {
+    public String getTripStartingTime() {
         return this.tripStartingTime;
     }
 
-    public void setTripStartingTime(LocalDateTime tripStartingTime) {
+    public void setTripStartingTime(String tripStartingTime) {
         this.tripStartingTime = tripStartingTime;
     }
 
-    public LocalDateTime getTripEndTime() {
+    public String getTripEndTime() {
         return this.tripEndTime;
     }
 
-    public void setTripEndTime(LocalDateTime tripEndTime) {
+    public void setTripEndTime(String tripEndTime) {
         this.tripEndTime = tripEndTime;
     }
 

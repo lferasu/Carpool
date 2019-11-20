@@ -40,6 +40,8 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 public class SearchController {
     private static final Logger LOG = Logger.getLogger(SearchController.class.getName());
     static DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+    
     
 
     @Autowired
@@ -48,28 +50,22 @@ public class SearchController {
     @Autowired 
     private QueryDSLService dslService;
 
-    // @Autowired
-	// private Client client;
 
-
-
-    @GetMapping()
+    @PostMapping()
     public List<TripSender> searchManger(@RequestBody SearchForm data){
          
 
-
-        if(data.getFrom() ==null && data.getDate().equals(null) && data.getTo().equals(null) && data.getNoOfSeats()==0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+        //find all method 
+        if(data.getFrom().equals("") && data.getDate().equals("") && data.getTo().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
 
             List<Trip> tripList = new ArrayList<>();
             Iterable<Trip> tripes = tripRepo.findAll();
             tripes.forEach(tripList::add);
-            // for (Trip trip : tripList) {
-            //     LOG.log(Level.INFO, trip.toString());
-            // }
+    
             List<TripSender> sender = new ArrayList<>();
             for (Trip trip : tripList) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
                 LOG.log(Level.INFO, trip.toString());
             }
@@ -77,12 +73,14 @@ public class SearchController {
             return sender;
         }
 
-        else if(data.getFrom() !=null && data.getDate().equals(null) && data.getTo().equals(null) && data.getNoOfSeats()==0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+
+        //user by pick up place 
+        else if(data.getFrom() != null && data.getDate().equals("") && data.getTo().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
             List<TripSender> sender = new ArrayList<>();
             List<Trip> s= tripRepo.findByPickUpPlace(data.getFrom());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -90,14 +88,14 @@ public class SearchController {
         }
 
 
-
-        else if(data.getFrom() != null && data.getTo() != null && data.getDate() != null && data.getNoOfSeats()==0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+        //multisearch with pick up places, drop off places and intial date 
+        else if(data.getFrom() != "" && data.getTo() != "" && data.getDate() != "" && data.getNoOfSeats()==null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
 
             List<TripSender> sender = new ArrayList<>();
-            List<Trip> s= dslService.searchMultiField(data.getFrom(), data.getTo(), data.getDate().format(formatterTime));
+            List<Trip> s= dslService.searchMultiField(data.getFrom(), data.getTo(), data.getDate());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -106,15 +104,15 @@ public class SearchController {
         }
 
 
-
-        else if(data.getFrom() == null && data.getTo() != null && data.getDate() == null && data.getNoOfSeats()==0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+        //user by dropoffplace only 
+        else if(data.getFrom().equals("") && data.getTo() != null && data.getDate().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
 
             
             List<TripSender> sender = new ArrayList<>();
             List<Trip> s= dslService.getDestinationPlaceSerachData(data.getTo());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -122,8 +120,8 @@ public class SearchController {
 
         }
 
-
-        else if((data.getFrom() != null || data.getTo() != null) && data.getDate() == null && data.getNoOfSeats()==0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+        // any text related to  the locations
+        else if((data.getFrom() != null || data.getTo() != null) && data.getDate().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
 
             String text = null;
             if(data.getFrom()==null){
@@ -136,7 +134,7 @@ public class SearchController {
             List<Trip> s= dslService.multiMatchQuery(text);
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -145,15 +143,15 @@ public class SearchController {
         }
 
 
-
-        else if(data.getFrom() == null && data.getTo() == null && data.getDate() == null && data.getNoOfSeats()==0 && data.getPriceRangeFrom()!=0 && data.getPriceRangeUntil()!=0){
+         // by price range only
+        else if(data.getFrom().equals("") && data.getTo().equals("") && data.getDate().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()!=null && data.getPriceRangeUntil()!=null){
 
             
             List<TripSender> sender = new ArrayList<>();
             List<Trip> s= dslService.getPriceRangeSearchData(data.getPriceRangeFrom(), data.getPriceRangeUntil());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -161,15 +159,15 @@ public class SearchController {
 
         }
 
-
-        else if(data.getFrom() == null && data.getTo() != null && data.getDate() == null && data.getNoOfSeats()!=0 && data.getPriceRangeFrom()==0 && data.getPriceRangeUntil()==0){
+        //search avilable seat and destination places
+        else if(data.getFrom().equals("") && data.getTo() != null && data.getDate().equals("") && data.getNoOfSeats()!=null && data.getPriceRangeFrom()==null && data.getPriceRangeUntil()==null){
 
             
             List<TripSender> sender = new ArrayList<>();
             List<Trip> s= dslService.getAvilableSeatANDDestination(data.getNoOfSeats(), data.getTo());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -177,14 +175,15 @@ public class SearchController {
 
         }
 
-        else if(data.getFrom() != null && data.getTo() != null && data.getDate() == null && data.getNoOfSeats()==0 && data.getPriceRangeFrom()!=0 && data.getPriceRangeUntil()!=0){
+        // sarch starting, destination and price range values
+        else if(data.getFrom() != null && data.getTo() != null && data.getDate().equals("") && data.getNoOfSeats()==null && data.getPriceRangeFrom()!=null && data.getPriceRangeUntil()!=null){
 
             
             List<TripSender> sender = new ArrayList<>();
             List<Trip> s= dslService.getFromToPriceRnageSearchData(data.getFrom(), data.getTo(),data.getPriceRangeFrom(),data.getPriceRangeUntil());
             for (Trip trip : s) {
                 User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
-                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), LocalDateTime.parse(trip.getTripStartingTime()), LocalDateTime.parse(trip.getTripEndTime()), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+                TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
                 sender.add(dd);
             }
             
@@ -196,9 +195,6 @@ public class SearchController {
         return null;
     } 
 
-
-
-
     @PostMapping("/saveTrip")
     public int saveTrip(@RequestBody List<Trip> trip){
         for (Trip trips : trip) {
@@ -208,93 +204,23 @@ public class SearchController {
         return trip.size();
     }
 
-
-    // @PostMapping("/create")
-    // public String create(@RequestBody Trip user) throws IOException {
-    //     IndexResponse response = client.prepareIndex("tfr", "tasd", user.getId())
-    //             .setSource(jsonBuilder()
-    //                     .startObject()
-    //                     .field("pickUpPlace", user.getPickUpPlace())
-    //                     .field("dropOffPlace", user.getDropOffPlace())
-    //                     .endObject()
-    //             )
-    //             .get();
-    //             tripRepo.save(user);
-    //            System.out.println("response id:"+response.getId());
-    //     return "added Succesffully ";
-    // }
-
-    // @GetMapping("/view/{id}")
-    // public Map<String, Object> view(@PathVariable final String id) {
-    //     GetResponse getResponse = client.prepareGet("tfr", "tasd", id).get();
-    //     System.out.println(getResponse.getSource());
-
-
-    //     return getResponse.getSource();
-    // }
-
-    @GetMapping("/findBypickUpPlace/{pickUpPlace}")
-    public List<Trip> findByFirstName(@PathVariable("pickUpPlace") String pickUpPlace){
-        List<Trip> s= tripRepo.findByPickUpPlace(pickUpPlace);
-        LOG.log(Level.INFO, s.toString());
-        return s;
-    }
-
     @GetMapping("/findAll")
-    public Iterable<Trip> finadAllTrip(){
+    public Iterable<TripSender> finadAllTrip(){
         List<Trip> tripList = new ArrayList<>();
         Iterable<Trip> tripes = tripRepo.findAll();
         tripes.forEach(tripList::add);
+
+        List<TripSender> sender = new ArrayList<>();
+
+
         for (Trip trip : tripList) {
+            User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
+            TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+            sender.add(dd);
             LOG.log(Level.INFO, trip.toString());
         }
-        return tripList;
+        
+        return sender;
     }
-
-    //multisearch with satrting,ending and intial date 
-    @GetMapping("/serachMultiField/{pickUpPlace}/{dropOffPlace}/{tripStartingTime}")
-	public List<Trip> serachByMultiField(@PathVariable String pickUpPlace, @PathVariable String dropOffPlace, @PathVariable String tripStartingTime) {
-		return dslService.searchMultiField(pickUpPlace, dropOffPlace, tripStartingTime);
-    }
-    
-    //user by dropoffplace
-    @GetMapping("/placeSearch/{dropOffPlace}")
-	public List<Trip> getUserByDropOffPlace(@PathVariable String dropOffPlace) {
-		return dslService.getDestinationPlaceSerachData(dropOffPlace);
-	}
-
-    // any text on the locations
-	@GetMapping("/search/{text}")
-	public List<Trip> doMultimatchQuery(@PathVariable String text) {
-		return dslService.multiMatchQuery(text);
-    }
-    
-    // by price range only 
-    @GetMapping("/serachPriceRange/{minmiumPrice}/{maximumPrice}")
-	public List<Trip> serachByPriceRange(@PathVariable Double minmiumPrice, @PathVariable Double maximumPrice) {
-		return dslService.getPriceRangeSearchData(minmiumPrice, maximumPrice);
-    }
-
-
-    //search avilable seat and destination places
-    @GetMapping("/serachPriceAndAvilableSeat/{numberOfAvilableSeats}/{dropOffPlace}")
-	public List<Trip> serachByPriceAvilableSeat(@PathVariable Integer numberOfAvilableSeats, @PathVariable String dropOffPlace) {
-		return dslService.getAvilableSeatANDDestination(numberOfAvilableSeats, dropOffPlace);
-    }
-
-
-    // sarch starting, destination and price range values
-    @GetMapping("/serachPriceLocations/{pickUpPlace}/{dropOffPlace}/{intialPrice}/{finalPrice}")
-	public List<Trip> serachByPriceRangeLocation(@PathVariable String pickUpPlace, @PathVariable String dropOffPlace, @PathVariable Double intialPrice, @PathVariable Double finalPrice ) {
-		return dslService.getFromToPriceRnageSearchData(pickUpPlace, dropOffPlace,intialPrice,finalPrice);
-    }
-
-
-     // sarch starting, destination and date range values
-     @GetMapping("/serachDateLocations/{pickUpPlace}/{dropOffPlace}/{tripStartingTime}/{tripEndTime}")
-     public List<Trip> serachByPriceRangeDate(@PathVariable String pickUpPlace, @PathVariable String dropOffPlace, @PathVariable String tripStartingTime, @PathVariable String tripEndTime ) {
-         return dslService.getFromToDateRnageSearchData(pickUpPlace, dropOffPlace,tripStartingTime,tripEndTime);
-     }
-
 
 }

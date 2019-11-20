@@ -22,8 +22,6 @@ import java.util.Map;
 @Configuration
 public class KafakListnerConfig {
 
-//    @Value("${kafka.bootstrap.servers}")
-//    String kafkaAdress;
     @Bean
     public ConsumerFactory<String, TripData> consumerFactory(){
         JsonDeserializer<TripData> deserializer = new JsonDeserializer<>(TripData.class);
