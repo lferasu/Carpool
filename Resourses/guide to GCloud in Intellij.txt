@@ -1,0 +1,30 @@
+
+Google Cloud SDK:
+
+Run/Debug Intellij project on Google Cloud Cluster Kubernetes!!! (example GuestBook from Google)
+1) Install Google Cloud SDK on Ubuntu (for using gcloud command)
+	https://cloud.google.com/sdk/docs/#deb
+
+2)  get credentials from cluster-1 which was created under project ea-mp2
+	gcloud config set project mumea-259123                    //set project ID
+	gcloud container clusters get-credentials standard-cluster-ea       //set cluster
+
+3) Run on Kubernetes
+
+
+Cassandra:
+
+1) Install Cassandra on Ubuntu
+	https://www.hostinger.com/tutorials/set-up-and-install-cassandra-ubuntu/
+2) Follow and learn this article from Spring boot and cassandra crud
+	https://medium.com/@ankitkumargupta/quick-start-spring-rest-api-with-cassandra-e112700936cf
+
+2) Create KEYSPACE:
+	1. $ cqlsh
+	2. cqlsh> CREATE KEYSPACE "mykeyspace"
+	   ... WITH REPLICATION = {
+	   ... 'class':'SimpleStrategy',
+	   ... 'replication_factor' : 1
+	   ... };
+
+	

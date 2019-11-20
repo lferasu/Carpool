@@ -1,0 +1,73 @@
+<form [formGroup]="tripForm" (ngSubmit)="submitTripForm()">
+    <section class="testimonial py-5" id="testimonial">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                    <div class=" ">
+                        <div class="card-body">
+                            <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                            <h2 class="py-3">Register new Trip</h2>
+                            <p> we will let our customers know about your trip
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 py-5 border">
+                    <h4 class="pb-4">Please fill with your trip detail</h4>
+                    <!-- <form> -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input formControlName="pickupPlace" placeholder="Pick up place" class="form-control"
+                                type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input formControlName="dropOffPlace" placeholder="Drop off place" class="form-control"
+                                type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <input formControlName="numberOfAvailableSeats" placeholder="Available seats"
+                                class="form-control" required="required" type="text">
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <input formControlName="tripPrice" placeholder="Trip price" class="form-control"
+                                required="required" type="text">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input formControlName="tripStartingTime" placeholder="Departure time" class="form-control"
+                                required="required" type="datetime-local">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <textarea formControlName="tripDescription" placeholder="Write a few words about your trip"
+                                cols="40" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2"
+                                        required>
+                                    <label class="form-check-label" for="invalidCheck2">
+                                        <small>By clicking Submit, you agree to our Terms & Conditions, Visitor
+                                            Agreement and Privacy Policy.</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="button" class="btn btn-danger" type="submit">Register</button>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

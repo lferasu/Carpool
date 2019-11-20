@@ -1,0 +1,20 @@
+.jumbotronleft {
+    width: 40vw;
+    float: left;
+}
+.jumbotronright {
+    margin-top: -5vh;
+    width: 40vw;
+    float: right;
+    height: 1vh;
+    margin-right: 10vw; 
+}
+
+.jumbotron{
+    height: 40vh;
+}
+
+.button {
+    /* width: 10vw; */
+    margin-left: 5vw;
+}

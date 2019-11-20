@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationservice
+  labels:
+    app: notificationservice
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationservice
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: notificationservice
+        tier: backend
+    spec:
+      initContainers:
+      - name: init-db-ready
+        image: mongo:4
+        command: ['/bin/sh', '-c']
+        args:
+          - echo "Waiting for mongodb at notificationservice-mongodb:27017 to go live before the BE...";
+          - until (mongo --host notificationservice-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done
+      containers:
+      - name: backend
+        image: notificationservice
+        ports:
+        - name: http-server
+          containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: SPRING_DATA_MONGODB_URI
+          value: "notificationservice-mongodb:27017"
+        - name: SPRING_DATA_MONGODB_DATABASE
+          value: "Carpool"
+
+        # This environment variable enables debugging support for the container.
+        # Remove this to disable the debug build.
+        - name: JAVA_TOOL_OPTIONS
+          value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+
+        - name: SPRING_MAIL_HOST
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: SPRING_MAIL_HOST
+        - name: SPRING_MAIL_PORT
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: SPRING_MAIL_PORT
+        - name: SPRING_MAIL_USERNAME
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: SPRING_MAIL_USERNAME
+        - name: SPRING_MAIL_PASSWORD
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: SPRING_MAIL_PASSWORD
+        - name: APP_EMAIL_ADDRESS
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: APP_EMAIL_ADDRESS
+        - name: EMAIL_SUBJECT
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: EMAIL_SUBJECT
+        - name: KAFKA_TOPIC_NOTIFICATION
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: KAFKA_TOPIC_NOTIFICATION
+
+
+        - name: KAFKA_TOPIC_NEWRESERVATION
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: KAFKA_TOPIC_NEWRESERVATION
+
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: KAFKA_BOOTSTRAP_SERVERS
+
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+              secretKeyRef:
+                name: notificationservice-secrets
+                key: KAFKA_BOOTSTRAP_SERVERS
+
+

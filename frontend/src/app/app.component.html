@@ -1,0 +1,124 @@
+<div class="jumbotron">
+  <div class="jumbotronleft">
+    <h1 class="display-4">MUM Carpool</h1>
+    <p class="lead">Find a trip and just ride along </p>
+    <hr class="my-4">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['alltrips']">Home </a>
+          </li>
+          <li class=" nav-item ">
+            <a class=" nav-link" [routerLink]="['trip']">Register A trip </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['alltrips']">View myTrip</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['alltrips']">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class=" jumbotronright">
+    <section class="testimonial py-5" id="testimonial">
+      <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
+
+        <div class="container" style="width: 50vw;">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="">Departure</label>
+              <fieldset class="form-group">
+                <input formControlName="from" placeholder="Departure" class="form-control form-control-lg"
+                  type="text" />
+              </fieldset>
+            </div>
+
+            <div class="col-md-6">
+              <label for="">Destination</label>
+              <fieldset class="form-group">
+                <input formControlName="to" placeholder="Destination" class="form-control form-control-lg"
+                  type="text" />
+              </fieldset>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="">No of seats</label>
+              <fieldset class="form-group">
+                <input formControlName="noOfSeats" placeholder="Number of seat" class="form-control form-control-lg"
+                  type="text" />
+              </fieldset>
+            </div>
+
+            <div class="col-sm-4">
+              <label for="">price:from</label>
+              <fieldset class="form-group">
+                <input formControlName="priceRangeFrom" placeholder="minimum price" class="form-control form-control-lg"
+                  type="text" />
+              </fieldset>
+            </div>
+
+            <div class="col-sm-4">
+              <label for="">price:to</label>
+              <fieldset class="form-group">
+                <input formControlName="priceRangeUntil" placeholder="maximum price"
+                  class="form-control form-control-lg" type="text" />
+              </fieldset>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-8">
+              <label for="">Date</label>
+              <fieldset class="form-group">
+                <input formControlName="date" placeholder="Date" class="form-control form-control-lg" type="date" />
+              </fieldset>
+            </div>
+            <div class="col-sm-4" style="margin-top: 3vh;">
+              <button class="btn btn-lg btn-primary pull-xs-right" style="width: 15vw;" type="submit">
+                Submit
+              </button>
+            </div>
+
+
+
+            <!-- <div class="col-sm-4">
+            <label for="sel1">Driver Gender:</label>
+            <fieldset class="form-group">
+              <select class="selectpicker" formControlName="driverGender">
+                <option formControlName="driverGender">I don't mind</option>
+                <option formControlName="driverGender">Male</option>
+                <option formControlName="driverGender">Gender</option>
+              </select>
+            </fieldset>
+          </div> -->
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+
+      </form>
+    </section>
+  </div>
+
+</div>
+<router-outlet></router-outlet>

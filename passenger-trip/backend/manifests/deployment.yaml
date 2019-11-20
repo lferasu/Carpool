@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-passenger-trip-backend
+  labels:
+    app: java-passenger-trip
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-passenger-trip
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: java-passenger-trip
+        tier: backend
+    spec:
+      #      initContainers:
+      #        - name: init-cassandra-ready
+      #          image: cassandra:3
+      #          command: ['/bin/sh', '-c']
+      #          args:
+      #            - echo "Waiting for mongodb at java-passenger-trip-mongodb:27017 to go live before the BE...";
+      #            - until (mongo --host java-passenger-trip-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done
+      containers:
+        - name: backend
+          image: shirmen/java-passenger-trip-backend
+          imagePullPolicy: Always
+          ports:
+            - name: http-server
+              containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: PASSENGER_TRIP_DB_ADDR
+              value: "java-passenger-trip-cassandradb:9042"
+            # This environment variable enables debugging support for the container.
+            # Remove this to disable the debug build.
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+            - name: passenger_trip_kafkaTopic
+              valueFrom:
+                secretKeyRef:
+                  name: passenger-trip-service-secrets
+                  key: PASSENGER_TRIP_KAFKATOPIC
+            - name: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+              valueFrom:
+                secretKeyRef:
+                  name: passenger-trip-service-secrets
+                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+            - name: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+              valueFrom:
+                secretKeyRef:
+                  name: passenger-trip-service-secrets
+                  key: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+            - name: SPRING_DATA_CASSANDRA_REPLICATION-FACTOR
+              valueFrom:
+                secretKeyRef:
+                  name: passenger-trip-service-secrets
+                  key: SPRING_DATA_CASSANDRA_REPLICATION_FACTOR
+
+

@@ -1,0 +1,4 @@
+FROM openjdk:8
+ADD target/notification-service-1.jar carpool-notification-service.jar
+EXPOSE 7000
+ENTRYPOINT ["java", "-jar", "carpool-notification-service.jar"]
