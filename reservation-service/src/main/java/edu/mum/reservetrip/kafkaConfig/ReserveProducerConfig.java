@@ -20,43 +20,9 @@ import java.util.Map;
 @Configuration
 public class ReserveProducerConfig {
 
-//    @Value("${kafka.bootstrap.servers}")
-//    private String bootstrapServers;
-//
-//    @Bean
-//    public Map<String, Object> producerConfigs() {
-//        Map<String, Object> properties = new HashMap<>();
-//        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-//        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-//        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-//
-//        return properties;
-//    }
-//
-//
-//
-//    @Bean
-//    public ProducerFactory<String, Trip> producerFactory() {
-//        return new DefaultKafkaProducerFactory<>(producerConfigs());
-//    }
-//
-//    @Bean
-//    public KafkaTemplate<String, Trip> kafkaTemplate() {
-//        return new KafkaTemplate<>(producerFactory());
-//    }
-
-
-
-
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<Object,Trip> kafkaListenerContainerFactory(){
-//        ConcurrentKafkaListenerContainerFactory<Object,Trip> factory = new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(consumerFactory());
-//        return factory;
-//    }
 
     @Bean
     public KafkaTemplate<String, Trip> orderKafkaTemplate(){
