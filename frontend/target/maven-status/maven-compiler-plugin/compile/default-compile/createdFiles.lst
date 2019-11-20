@@ -1,0 +1,8 @@
+edu/mum/ea/passenger/frontend/entity/Result.class
+edu/mum/ea/passenger/frontend/PrintDuration.class
+edu/mum/ea/passenger/frontend/entity/PassengerEntity.class
+edu/mum/ea/passenger/frontend/controller/FrontendController.class
+edu/mum/ea/passenger/frontend/entity/AddressEntity.class
+edu/mum/ea/passenger/frontend/entity/TripEntity.class
+edu/mum/ea/passenger/frontend/FrontendApplication.class
+edu/mum/ea/passenger/frontend/controller/HomeController.class
