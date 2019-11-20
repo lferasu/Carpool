@@ -6,7 +6,8 @@ $  make docker-push-all
 ``` 
 
 #### Step 2
-Deploy all yaml files to Google Cloud Kubernetes
+Deploy all services to Google Cloud Kubernetes 
+Also add Kafka Topics in kafka service for the service using
 ```
 $ make kubectl-apply-all
 ```

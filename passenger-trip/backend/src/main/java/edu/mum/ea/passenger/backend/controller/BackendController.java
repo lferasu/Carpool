@@ -6,8 +6,10 @@ import edu.mum.ea.passenger.backend.entity.TripEntity;
 import edu.mum.ea.passenger.backend.repository.PassengerTripRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.InetAddress;
@@ -24,7 +26,17 @@ import java.util.UUID;
 public class BackendController {
 
     @Autowired
+    KafkaTemplate<String, TripEntity> kafkaTemplate;
+
+
+    private final String TOPIC;
+
+    @Autowired
     private PassengerTripRepository passengerTripRepository;
+
+    public BackendController(@Value("${passenger.trip.kafkaTopic: passenger-trip}") String topic) {
+        TOPIC = topic;
+    }
 
     // for K8S Health check
     @GetMapping("/")
@@ -36,7 +48,9 @@ public class BackendController {
             e.printStackTrace();
             log.error(e);
         }
-
+        TripEntity trip = new TripEntity();
+        trip.setId(UUID.randomUUID());
+        kafkaTemplate.send(TOPIC, trip);
         return new ResponseEntity<>("products-service. Host: " + host, HttpStatus.OK);
     }
 
@@ -92,6 +106,7 @@ public class BackendController {
             return ResponseEntity.ok().body(new Result(false, ex.getMessage()));
         }
         log.info("Saved trip {}", trip);
+        kafkaTemplate.send(TOPIC, trip);
         return ResponseEntity.ok().body(new Result(true, "Saved successfully"));
     }
 
