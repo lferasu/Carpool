@@ -5,15 +5,15 @@ items:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: kafka
-      name: kafka
+        io.kompose.service: carpoolkafka
+      name: carpoolkafka
     spec:
       ports:
         - name: "9092"
           port: 9092
           targetPort: 9092
       selector:
-        io.kompose.service: kafka
+        io.kompose.service: carpoolkafka
     status:
       loadBalancer: {}
   - apiVersion: v1
@@ -35,15 +35,15 @@ items:
   -  apiVersion: apps/v1beta1
      kind: StatefulSet
      metadata:
-       name: kafka
+       name: carpoolkafka
      spec:
-       serviceName: kafka
+       serviceName: carpoolkafka
        replicas: 1
        template:
          metadata:
            labels:
-             app: kafka
-             io.kompose.service: kafka
+             app: carpoolkafka
+             io.kompose.service: carpoolkafka
          spec:
            initContainers:
              - name: volume-permissions
@@ -54,7 +54,7 @@ items:
                    name: kafka-data
            terminationGracePeriodSeconds: 10
            containers:
-             - name: kafka
+             - name: carpoolkafka
                image: bitnami/kafka:latest
                imagePullPolicy: IfNotPresent
                env:
@@ -62,6 +62,10 @@ items:
                    value: zookeeper:2181
                  - name: ALLOW_PLAINTEXT_LISTENER
                    value: "yes"
+                 - name: KAFKA_LISTENERS
+                   value: PLAINTEXT://:9092
+#                 - name: KAFKA_ADVERTISED_LISTENERS
+#                   value: PLAINTEXT://carpoolkafka:9092
                ports:
                  - containerPort: 9092
                resources: {}

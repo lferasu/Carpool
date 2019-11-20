@@ -3,7 +3,7 @@ TOPIC2=NEWRESERVATION
 TOPIC3=registredTrip
 TOPIC4=searchregistredTrip
 
-KAFKA-POD=kafka-0
+KAFKA-POD=carpoolkafka-0
 ZOOKEEPER-SERVICE=zookeeper
 
 K8S-install:

@@ -1,6 +1,5 @@
 DOCKERHUBREPO=shirmen
-IMAGE=${DOCKERHUBREPO}/java-passenger-trip-backend
-
+IMAGE=${DOCKERHUBREPO}/reservation-service
 # ===== Maven =====
 maven-rebuild:
 	mvn clean && mvn install
@@ -10,7 +9,7 @@ docker-build: maven-rebuild
 	docker build -t ${IMAGE} .
 
 docker-run:
-	docker run -p 8080:8081 ${IMAGE}
+	docker run -p 8080:8080 ${IMAGE}
 
 docker-login:
 	docker login
