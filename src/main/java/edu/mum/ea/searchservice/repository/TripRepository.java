@@ -11,5 +11,6 @@ import edu.mum.ea.searchservice.model.Trip;
 public interface TripRepository extends ElasticsearchRepository<Trip, Long> {
 
 	List<Trip> findByPickUpPlace(String pickUpPlace);
+	List<Trip> findByEmailAddress(String emailAddress);
     
 }

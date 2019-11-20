@@ -223,4 +223,23 @@ public class SearchController {
         return sender;
     }
 
+    @GetMapping("/email/{emailAddress}")
+    public Iterable<TripSender> findByEmail(@PathVariable("emailAddress")String emailAddress){
+        List<Trip> tripList = new ArrayList<>();
+        Iterable<Trip> tripes = tripRepo.findByEmailAddress(emailAddress+".com");
+        tripes.forEach(tripList::add);
+
+        List<TripSender> sender = new ArrayList<>();
+
+
+        for (Trip trip : tripList) {
+            User driver = new User(trip.getDriverId(), trip.getFirstName(), trip.getLastName(), trip.getEmailAddress(), trip.getAdrStreet(), trip.getAdrCity(), trip.getAdrState(), trip.getAdrZip());
+            TripSender dd = new TripSender(trip.getId(), trip.getPickUpPlace(), trip.getDropOffPlace(), trip.getTripStartingTime(), trip.getTripEndTime(), trip.isIsRoundTrip(), trip.getNumberOfAvilableSeats(), 0, trip.getTripPrice(), trip.getTripDescription(), driver, null);
+            sender.add(dd);
+            LOG.log(Level.INFO, trip.toString());
+        }
+        
+        return sender;
+    }
+
 }
