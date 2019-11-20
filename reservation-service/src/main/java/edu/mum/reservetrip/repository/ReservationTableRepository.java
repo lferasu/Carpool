@@ -13,4 +13,7 @@ public interface ReservationTableRepository extends CassandraRepository<Reservat
 
     @AllowFiltering
     ReservationTable findByUserIdAndTripId(long userId, long tripId);
+
+    @AllowFiltering
+    ReservationTable findByTripId(long id);
 }

@@ -14,22 +14,8 @@ import java.util.UUID;
 @Table("reservationtable")
 public class ReservationTable {
 
-//    @PrimaryKey
-//    private ReservationUserTripPK primarykey;
-
-//    @PrimaryKeyColumn(name = "userId", ordinal = 0, type = PrimaryKeyType.PARTITIONED, ordering = Ordering.DESCENDING)
-//    private long userId;
-//
-//    @PrimaryKeyColumn(name = "trip_id", ordinal = 2, type = PrimaryKeyType.PARTITIONED, ordering = Ordering.DESCENDING)
+    @PrimaryKeyColumn(name = "trip_id", type = PrimaryKeyType.PARTITIONED, ordering = Ordering.DESCENDING)
     private long tripId;
-//
-//    @PrimaryKeyColumn(name = "driver_id", ordinal = 1, type = PrimaryKeyType.PARTITIONED)
-//    private long driverId;
-
-//    @PrimaryKeyColumn(name = "reservation_id", ordinal = 3, type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
-//    private UUID reservationId;
-    @PrimaryKeyColumn(name = "reservation_id", type = PrimaryKeyType.PARTITIONED, ordering = Ordering.DESCENDING)
-    private long reservationId;
 
     private int noOfReservedSeats;
     private boolean canceled = false;

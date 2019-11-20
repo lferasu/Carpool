@@ -9,7 +9,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @Data
 public class Reservation {
 
-    private long id;
+//    private long id;
     private int noOfReservedSeats;
     private boolean canceled = false;
     private User reservedBy;
