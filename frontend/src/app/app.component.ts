@@ -27,7 +27,7 @@ export class AppComponent {
   }
 
   submitSearchForm() {
-
+    console.log(this.searchForm.value);
   }
 
 }
