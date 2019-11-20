@@ -23,11 +23,19 @@ public class ReserveProducerConfig {
     @Autowired
     private ObjectMapper objectMapper;
 
+    private final String KAFKA_URI;
+
+    public ReserveProducerConfig(@Value("${passenger.trip.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
+        KAFKA_URI = kafka_uri;
+    }
+
+
+
 
     @Bean
     public KafkaTemplate<String, Trip> orderKafkaTemplate(){
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URI);
         ProducerFactory<String, Trip> producerFactory = new DefaultKafkaProducerFactory<>(props, new StringSerializer(), new JsonSerializer<Trip>(objectMapper));
 
         return new KafkaTemplate<>(producerFactory);

@@ -1,5 +1,6 @@
 package edu.mum.reservetrip.cassandraConfig;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.SchemaAction;
@@ -15,7 +16,20 @@ import java.util.List;
 @EnableCassandraRepositories
 public class CassandraDBConfig extends AbstractCassandraConfiguration {
 
-    public static final String KEYSPACE = "reservetripdb";
+    private final String KEYSPACE;
+    private final String hosts;
+    private final String replication_factor;
+
+    CassandraDBConfig(
+            @Value("${spring.data.cassandra.keyspace-name}") String keyspace,
+            @Value("${spring.data.cassandra.contact-points}") String hosts,
+            @Value("${spring.data.cassandra.replication-factor}") String replication_factor) {
+        this.KEYSPACE = keyspace;
+        this.hosts = hosts;
+        this.replication_factor = replication_factor;
+    }
+
+//    public static final String KEYSPACE = "reservetripdb";
 
     @Override
     protected String getKeyspaceName() {
