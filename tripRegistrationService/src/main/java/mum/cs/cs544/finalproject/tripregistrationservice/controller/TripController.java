@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import javax.xml.bind.ValidationException;
+
+import javax.validation.ValidationException;
+//import javax.xml.bind.ValidationException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;

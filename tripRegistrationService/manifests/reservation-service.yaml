@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trip-registration-service
+  labels:
+    app: trip-registration-service
+spec:
+#  type: ClusterIP
+  type: LoadBalancer
+  selector:
+    app: trip-registration-service
+  ports:
+  - port: 8080
+    targetPort: 8080

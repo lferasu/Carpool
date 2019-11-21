@@ -1,0 +1,2 @@
+10.70.0.185     carpoolkafka-0.carpoolkafka.default.svc.cluster.local
+10.70.0.185     carpoolkafka-0.carpoolkafka.default.svc.cluster.local
