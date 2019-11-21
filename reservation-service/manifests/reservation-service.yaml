@@ -11,4 +11,4 @@ spec:
     app: reservation-service
   ports:
   - port: 8080
-    targetPort: http-server
+    targetPort: 8080

@@ -25,7 +25,7 @@ public class ReserveProducerConfig {
 
     private final String KAFKA_URI;
 
-    public ReserveProducerConfig(@Value("${passenger.trip.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
+    public ReserveProducerConfig(@Value("${reservation.service.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
         KAFKA_URI = kafka_uri;
     }
 
