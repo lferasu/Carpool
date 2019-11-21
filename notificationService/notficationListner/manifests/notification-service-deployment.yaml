@@ -1,35 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notificationservice
+  name: notification-service
   labels:
-    app: notificationservice
-    tier: backend
+    app: notification-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notificationservice
-      tier: backend
+      app: notification-service
   template:
     metadata:
       labels:
-        app: notificationservice
-        tier: backend
+        app: notification-service
     spec:
-      initContainers:
-      - name: init-db-ready
-        image: mongo:4
-        command: ['/bin/sh', '-c']
-        args:
-          - echo "Waiting for mongodb at notificationservice-mongodb:27017 to go live before the BE...";
-          - until (mongo --host notificationservice-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done
       containers:
-      - name: backend
-        image: notificationservice
+      - name: notification-service
+        image: lferasu/notification-service
+        imagePullPolicy: Always
         ports:
-        - name: http-server
-          containerPort: 8080
+            - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
@@ -46,56 +36,55 @@ spec:
         - name: SPRING_MAIL_HOST
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: SPRING_MAIL_HOST
         - name: SPRING_MAIL_PORT
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: SPRING_MAIL_PORT
         - name: SPRING_MAIL_USERNAME
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: SPRING_MAIL_USERNAME
         - name: SPRING_MAIL_PASSWORD
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: SPRING_MAIL_PASSWORD
         - name: APP_EMAIL_ADDRESS
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: APP_EMAIL_ADDRESS
         - name: EMAIL_SUBJECT
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: EMAIL_SUBJECT
         - name: KAFKA_TOPIC_NOTIFICATION
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: KAFKA_TOPIC_NOTIFICATION
 
 
         - name: KAFKA_TOPIC_NEWRESERVATION
           valueFrom:
               secretKeyRef:
-                name: notificationservice-secrets
+                name: notification-service-secrets
                 key: KAFKA_TOPIC_NEWRESERVATION
 
-        - name: KAFKA_BOOTSTRAP_SERVERS
-          valueFrom:
-              secretKeyRef:
-                name: notificationservice-secrets
-                key: KAFKA_BOOTSTRAP_SERVERS
+#        - name: KAFKA_BOOTSTRAP_SERVERS
+#          valueFrom:
+#              secretKeyRef:
+#                name: notification-service-secrets
+#                key: KAFKA_BOOTSTRAP_SERVERS
 
-        - name: KAFKA_BOOTSTRAP_SERVERS
-          valueFrom:
-              secretKeyRef:
-                name: notificationservice-secrets
-                key: KAFKA_BOOTSTRAP_SERVERS
-
+#        - name: NOTFICATION_SERVICE_KAFKAURI
+#          valueFrom:
+#              secretKeyRef:
+#              name: notificationservice-secrets
+#              key: NOTFICATION_SERVICE_KAFKAURI
 
