@@ -122,7 +122,7 @@ public class AuthController {
 //		//kafkaTemplate.send(TOPIC, new Messages(msg.getToken(), msg.getUserId()));
 //		kafkaTemplate.send(TOPIC, messages);
 //		return "Published Successfully";
-//	}
+///	}
 
 
 
