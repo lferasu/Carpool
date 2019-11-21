@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7e110ff5-8759-4e04-8340-eccd5a50a6d7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../reservation-service/src/main/resources/bootstrap.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/src/main/java/edu/mum/zipkinserver/ZipkinServerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../zipkin-server/src/test/java/edu/mum/zipkinserver/ZipkinServerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifests/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifests/mysql-auth-service-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifests/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/Auth_serviceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/JwtAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/JwtRequestFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/JwtTokenUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/JwtUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/KafkaConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/configs/WebSecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/controllers/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/controllers/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/entities/UserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/listener/KafkaConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/models/Messages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/models/SignInCredentials.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/mum/ea3/auth_service/repos/UsersRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/auth_service.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/auth_service.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/Auth_serviceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/configs/JwtAuthenticationEntryPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/configs/JwtRequestFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/configs/JwtTokenUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/configs/JwtUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/configs/WebSecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/controllers/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/controllers/HomeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/entities/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/models/SignInCredentials.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/mum/ea3/auth_service/repos/UsersRepo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reservation-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../reservation-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reservation-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../reservation-service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TtQSIHVdLbo9DlpaCJC35pLyik" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zipkin-server" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="edu.mum.ea3.auth_service.configs" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Auth_serviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="auth_service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="edu.mum.ea3.auth_service.Auth_serviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e110ff5-8759-4e04-8340-eccd5a50a6d7" name="Default Changelist" comment="" />
+      <created>1574276910031</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574276910031</updated>
+      <workItem from="1574276915009" duration="19713000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
