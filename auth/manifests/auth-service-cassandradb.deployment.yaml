@@ -6,20 +6,20 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: auth-service-cassandradb
+  name: auth_service-cassandradb
   labels:
-    app: auth-service
+    app: auth_service
     tier: db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth-service
+      app: auth_service
       tier: db
   template:
     metadata:
       labels:
-        app: auth-service
+        app: auth_service
         tier: db
     spec:
       containers:
