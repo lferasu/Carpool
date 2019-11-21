@@ -1,9 +1,9 @@
 package edu.mum.ea2.auth_service.controllers;
 
+import edu.mum.ea2.auth_service.entities.User;
 import edu.mum.ea2.auth_service.entities.UserEntity;
 import edu.mum.ea2.auth_service.repos.UsersRepo;
-import edu.mum.shared.models.User;
-import edu.mum.shared.utils.EaUtils;
+import edu.mum.ea2.auth_service.utils.EaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

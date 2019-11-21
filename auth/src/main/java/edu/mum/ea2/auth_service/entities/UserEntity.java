@@ -1,6 +1,5 @@
 package edu.mum.ea2.auth_service.entities;
 
-import edu.mum.shared.models.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
