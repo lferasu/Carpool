@@ -16,15 +16,19 @@ spec:
     spec:
       containers:
       - name: notification-service
-        image: lferasu/notification-service
+#        image: lferasu/notification-service
+        image: shirmen/notification-service
         imagePullPolicy: Always
         ports:
             - containerPort: 8080
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/ash", "-c", "echo '10.70.0.185     carpoolkafka-0.carpoolkafka.default.svc.cluster.local' >> /etc/hosts"]
         env:
         - name: PORT
           value: "8080"
-        - name: SPRING_DATA_MONGODB_URI
-          value: "notificationservice-mongodb:27017"
+
         - name: SPRING_DATA_MONGODB_DATABASE
           value: "Carpool"
 
@@ -75,6 +79,18 @@ spec:
               secretKeyRef:
                 name: notification-service-secrets
                 key: KAFKA_TOPIC_NEWRESERVATION
+
+        - name: SPRING_DATA_MONGODB_URI
+          valueFrom:
+              secretKeyRef:
+                name: notification-service-secrets
+                key: SPRING_DATA_MONGODB_URI
+
+        - name: notfication_service_kafkaUri
+          valueFrom:
+              secretKeyRef:
+                name: notification-service-secrets
+                key: notfication_service_kafkaUri
 
 #        - name: KAFKA_BOOTSTRAP_SERVERS
 #          valueFrom:

@@ -1,4 +1,5 @@
-DOCKERHUBREPO=lferasu
+# DOCKERHUBREPO=lferasu
+DOCKERHUBREPO=shirmen
 IMAGE=${DOCKERHUBREPO}/notification-service
 # ===== Maven =====
 maven-rebuild:
