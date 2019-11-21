@@ -23,7 +23,6 @@ public class UserEntity {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @PrimaryKey
-
     private int id;
     private String firstName;
     private String lastName;

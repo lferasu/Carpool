@@ -1,0 +1,8 @@
+spring:
+  data:
+    cassandra:
+      cluster-name: Test Cluster
+      keyspace-name: usersdb
+      port: 9042
+      contact-points:
+        - java-auth-service-cassandradb
