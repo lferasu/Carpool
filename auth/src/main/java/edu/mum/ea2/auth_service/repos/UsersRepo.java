@@ -14,7 +14,7 @@ public interface UsersRepo extends CrudRepository<UserEntity, Integer> {
     @AllowFiltering
 	UserEntity findById(int id);
 
-//    List<UserEntity> findAll();
+///    List<UserEntity> findAll();
 
     //void deleteByEmail(String email);
 

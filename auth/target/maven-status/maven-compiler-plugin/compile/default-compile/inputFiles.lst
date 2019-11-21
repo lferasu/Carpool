@@ -1,6 +1,7 @@
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/models/Messages.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/listener/KafkaConsumer.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/KafkaConfiguration.java
+/Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/models/JwtResponse.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/models/SignInCredentials.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/JwtTokenUtil.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/JwtUserService.java
