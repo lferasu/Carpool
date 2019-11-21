@@ -2,6 +2,7 @@
 package mum.cs.cs544.finalproject.tripregistrationservice.kafkaconfig;
 import mum.cs.cs544.finalproject.tripregistrationservice.model.SearchTripKafka;
 import mum.cs.cs544.finalproject.tripregistrationservice.model.Trip;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,10 +28,17 @@ public class KafkaProducerConfig {
     @Autowired
     private ObjectMapper objectMapper2;
 
+    @Value("${reservation.service.kafkaUri}")
+    private final String KAFKA_URI;
+
+    public KafkaProducerConfig(@Value("${reservation.service.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
+        KAFKA_URI = kafka_uri;
+    }
+
     @Bean
     public KafkaTemplate<String, Trip> orderKafkaTemplate(){
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URI);
         ProducerFactory<String, Trip> producerFactory = new DefaultKafkaProducerFactory<>(props, new StringSerializer(), new JsonSerializer<Trip>(objectMapper));
         return new KafkaTemplate<>(producerFactory);
     }
@@ -39,7 +47,7 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String, SearchTripKafka> orderKafkaTemplate2(){
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URI);
         ProducerFactory<String, SearchTripKafka> producerFactory = new DefaultKafkaProducerFactory<>(props, new StringSerializer(), new JsonSerializer<SearchTripKafka>(objectMapper2));
         return new KafkaTemplate<>(producerFactory);
     }

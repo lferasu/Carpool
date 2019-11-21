@@ -24,13 +24,19 @@ public class KafkaProducerConfig {
     @Value("${kafka.bootstrap.servers}")
     String kafkaAdress;
 
+    private final String KAFKA_URI;
+
+    public KafkaProducerConfig(@Value("${notfication.service.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
+        KAFKA_URI = kafka_uri;
+    }
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Bean
     public KafkaTemplate<String, Notification> orderKafkaTemplate(){
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URI);
         ProducerFactory<String, Notification> producerFactory = new DefaultKafkaProducerFactory<>(props, new StringSerializer(), new JsonSerializer<Notification>(objectMapper));
 
         return new KafkaTemplate<>(producerFactory);

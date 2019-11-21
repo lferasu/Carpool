@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trip-registration-service
+  labels:
+    app: trip-registration-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: trip-registration-service
+    spec:
+      containers:
+        - name: trip-registration-service
+          image: shirmen/trip-registration-service
+          imagePullPolicy: Always
+          ports:
+              - containerPort: 8080
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/ash", "-c", "echo '10.70.0.185     carpoolkafka-0.carpoolkafka.default.svc.cluster.local' >> /etc/hosts"]
+          env:
+            - name: PORT
+              value: "8080"
+            - name: spring_data_cassandra_contact-points
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+            - name: JAVA_TOOL_OPTIONS
+              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+
+            - name: trip-registration_SERVICE_KAFKATOPIC
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: trip-registration_SERVICE_KAFKATOPIC
+
+            - name: trip-registration_SERVICE_KAFKAURI
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: trip-registration_SERVICE_KAFKAURI
+
+            - name: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+
+            - name: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+
+            - name: SPRING_DATA_CASSANDRA_REPLICATION-FACTOR
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: SPRING_DATA_CASSANDRA_REPLICATION_FACTOR
+            - name: reservation_service_kafkaUri
+              valueFrom:
+                secretKeyRef:
+                  name: trip-registration-service-secrets
+                  key: reservation_service_kafkaUri
+
+  selector:
+    matchLabels:
+      app: trip-registration-service
+

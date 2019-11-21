@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trip-registration-service-cassandradb
+  labels:
+    app: trip-registration-service
+    tier: db
+spec:
+  ports:
+    - port: 9042
+      targetPort: 9042
+  selector:
+    app: trip-registration-service
+    tier: db

@@ -59,10 +59,10 @@ public class NotificationListner {
 
         private void sendEmail(Notification notification) {
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            mailSender.setHost(emailConfiguration.getHost());
-            mailSender.setPort(emailConfiguration.getPort());
-            mailSender.setUsername(emailConfiguration.getUsername());
-            mailSender.setPassword(emailConfiguration.getPassword());
+            mailSender.setHost("smtp.mailtrap.io");
+            mailSender.setPort(25);
+            mailSender.setUsername("7ebd686d62d48b");
+            mailSender.setPassword("258180aa6560e6");
             //Create an email instance
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(adminEmail);

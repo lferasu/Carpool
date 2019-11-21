@@ -20,6 +20,12 @@ public class KafkaConfig {
 
     @Value("${kafka.bootstrap.servers}")
     String kafkaAdress;
+    private final String KAFKA_URI;
+
+    public KafkaConfig(@Value("${notfication.service.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
+        KAFKA_URI = kafka_uri;
+    }
+
     @Bean
     public ConsumerFactory<String, Trip> consumerFactory(){
         JsonDeserializer<Trip> deserializer = new JsonDeserializer<>(Trip.class);
@@ -29,7 +35,7 @@ public class KafkaConfig {
 
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_URI);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_one");
         config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
