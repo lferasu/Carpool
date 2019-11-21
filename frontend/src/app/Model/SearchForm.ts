@@ -1,9 +1,9 @@
 export interface SearchForm {
     from: String;
-    to:String;
-    date:Date;
+    to: String;
+    date: Date;
     noOfSeats: Number;
-    priceRangeFrom:Number;
-    priceRangeUntil:Number;
-    driverGender:String;
+    priceRangeFrom: Number;
+    priceRangeUntil: Number;
+    driverGender: String;
 }
