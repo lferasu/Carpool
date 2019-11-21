@@ -16,35 +16,33 @@ spec:
           image: puje2docker/auth-service
 #          image: shirmen/auth-service
           imagePullPolicy: Always
-          ports:
-              - containerPort: 8080
-          env:
-            - name: PORT
-              value: "8080"
-            - name: spring_data_cassandra_contact-points
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
-            - name: JAVA_TOOL_OPTIONS
-              value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
-            - name: SPRING_DATA_CASSANDRA_CONTACT-POINTS
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+            ports:
+                - name: http-server
+                  containerPort: 8080
+            env:
+                - name: PORT
+                  value: "8080"
+                - name: AUTH_SERVICE_DB_ADDR
+                  value: "auth-service-cassandradb:9042"
+                - name: JAVA_TOOL_OPTIONS
+                  value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+              - name: SPRING_DATA_CASSANDRA_CONTACT-POINTS
+                valueFrom:
+                  secretKeyRef:
+                    name: auth-service-secrets
+                    key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
 
-            - name: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+              - name: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: auth-service-secrets
+                    key: SPRING_DATA_CASSANDRA_KEYSPACE-NAME
 
-            - name: SPRING_DATA_CASSANDRA_REPLICATION-FACTOR
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: SPRING_DATA_CASSANDRA_REPLICATION_FACTOR
+              - name: SPRING_DATA_CASSANDRA_REPLICATION-FACTOR
+                valueFrom:
+                  secretKeyRef:
+                    name: auth-service-secrets
+                    key: SPRING_DATA_CASSANDRA_REPLICATION_FACTOR
   selector:
     matchLabels:
       app: auth-service
