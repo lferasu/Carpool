@@ -26,7 +26,7 @@ spec:
       #            - until (mongo --host java-passenger-trip-mongodb:27017 >/dev/null) do echo "Waiting for connection for 2 sec."; sleep 2; done
       containers:
         - name: backend
-          image: puje2docker/java-auth-service-backend
+          image: puje2docker/auth-service
           imagePullPolicy: Always
           ports:
             - name: http-server
