@@ -17,7 +17,7 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:                  # Environment variables supplied to the Pod
+          env:                  # Environment variables supplied to the Pods
             - name: SPRING_DATASOURCE_USERNAME # Name of the environment variable
               valueFrom:          # Get the value of environment variable from kubernetes secrets
                 secretKeyRef:
