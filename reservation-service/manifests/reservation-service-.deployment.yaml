@@ -2,29 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reservation-service
+  labels:
+    app: reservation-service
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: reservation-service
   template:
     metadata:
       labels:
         app: reservation-service
+    spec:
       containers:
         - name: reservation-service
-          image: getaneh/reservation-service
+          image: shirmen/reservation-service
           imagePullPolicy: Always
           ports:
-            - name: http-server
-              containerPort: 8080
+              - containerPort: 8080
           env:
             - name: PORT
               value: "8080"
-            - name: RESERVATION_DB_ADDR
-              value: "reservation-service-cassandradb:9042"
-            # This environment variable enables debugging support for the container.
-            # Remove this to disable the debug build.
+            - name: spring_data_cassandra_contact-points
+              valueFrom:
+                secretKeyRef:
+                  name: reservation-service-secrets
+                  key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
 
@@ -57,5 +57,7 @@ spec:
                 secretKeyRef:
                   name: reservation-service-secrets
                   key: SPRING_DATA_CASSANDRA_REPLICATION_FACTOR
-
+  selector:
+    matchLabels:
+      app: reservation-service
 

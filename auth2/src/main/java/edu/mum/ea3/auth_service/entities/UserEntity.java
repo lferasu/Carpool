@@ -1,14 +1,18 @@
-package edu.mum.ea3.auth_service.entities;
+package edu.mum.ea2.auth_service.entities;
 
 //import edu.mum.shared.models.User;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+<<<<<<< HEAD:auth2/src/main/java/edu/mum/ea3/auth_service/entities/UserEntity.java
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.UUID;
+=======
+import org.springframework.data.cassandra.core.mapping.Table;
+>>>>>>> 19678fa99308909681f623056ba719e258900b07:auth/src/main/java/edu/mum/ea2/auth_service/entities/UserEntity.java
 
 //import javax.persistence.*;
 
@@ -17,7 +21,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+<<<<<<< HEAD:auth2/src/main/java/edu/mum/ea3/auth_service/entities/UserEntity.java
 @Table("users")
+=======
+@Table("user")
+>>>>>>> 19678fa99308909681f623056ba719e258900b07:auth/src/main/java/edu/mum/ea2/auth_service/entities/UserEntity.java
 public class UserEntity {
 
 //    private final long idInitial = 0;

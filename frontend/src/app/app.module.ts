@@ -8,13 +8,20 @@ import { AlltripsComponent } from './Components/alltrips/alltrips.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from './Components/modal/modal.component';
 import { ModalModule } from 'ngb-modal';
-import { TripComponent } from './Components/trip/trip.component'
+import { TripComponent } from './Components/trip/trip.component';
+import { SearchedTripsComponent } from './Components/searched-trips/searched-trips.component';
+import { LoginComponent } from './Components/login/login.component';
+import { SignupComponent } from './Components/signup/signup.component'
+import { AuthGuard } from './Service/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
     AlltripsComponent,
     ModalComponent,
-    TripComponent
+    TripComponent,
+    SearchedTripsComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -22,9 +29,10 @@ import { TripComponent } from './Components/trip/trip.component'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ModalModule
+    ModalModule,
+
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

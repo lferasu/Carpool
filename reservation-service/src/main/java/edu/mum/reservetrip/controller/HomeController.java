@@ -1,8 +1,5 @@
 package edu.mum.reservetrip.controller;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +10,6 @@ import java.net.UnknownHostException;
 
 @RestController
 public class HomeController {
-//    @Autowired
-//    UsersRepo usersRepo;
 
     @GetMapping("/")
     public ResponseEntity<?> index() {
@@ -25,15 +20,15 @@ public class HomeController {
             e.printStackTrace();
         }
 
-        return new ResponseEntity<>("auth-service. Host: " + host, HttpStatus.OK);
+        return new ResponseEntity<>("reservation-service. Host: " + host, HttpStatus.OK);
     }
 
-    @Value("${service-secret}")
-    private String serviceSecret;
+//    @Value("${passenger-secret}")
+//    private String serviceSecret;
 
     @GetMapping("/test")
     public String firstPage() {
-
         return "Ok. You authenticated user";
-    } }
+    }
 
+}

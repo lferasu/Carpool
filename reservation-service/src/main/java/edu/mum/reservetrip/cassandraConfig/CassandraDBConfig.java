@@ -1,8 +1,10 @@
 package edu.mum.reservetrip.cassandraConfig;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
+import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
 import org.springframework.data.cassandra.core.cql.keyspace.DropKeyspaceSpecification;
@@ -10,6 +12,7 @@ import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -23,7 +26,7 @@ public class CassandraDBConfig extends AbstractCassandraConfiguration {
     CassandraDBConfig(
             @Value("${spring.data.cassandra.keyspace-name}") String keyspace,
             @Value("${spring.data.cassandra.contact-points}") String hosts,
-            @Value("${spring.data.cassandra.replication-factor}") String replication_factor) {
+            @Value("${spring.data.cassandra.replication-factor:1}") String replication_factor) {
         this.KEYSPACE = keyspace;
         this.hosts = hosts;
         this.replication_factor = replication_factor;
@@ -60,6 +63,65 @@ public class CassandraDBConfig extends AbstractCassandraConfiguration {
         return new String[]{"edu.mum.reservetrip.model"};
     }
 
-//    @Override
+    //    @Override
 //    protected boolean getMetricsEnabled() { return false; }
+    @Override
+    protected List<String> getStartupScripts() {
+        return Collections.singletonList("CREATE KEYSPACE IF NOT EXISTS \""
+                + KEYSPACE + "\" WITH replication = {"
+                + " 'class': 'SimpleStrategy', "
+                + " 'replication_factor': '" + this.replication_factor + "'};");
+
+    }
+
+    @Bean
+    @Override
+    public CassandraClusterFactoryBean cluster() {
+
+        super.cluster();
+
+        RetryingCassandraClusterFactoryBean bean = new RetryingCassandraClusterFactoryBean();
+
+        bean.setAddressTranslator(getAddressTranslator());
+        bean.setAuthProvider(getAuthProvider());
+        bean.setClusterBuilderConfigurer(getClusterBuilderConfigurer());
+        bean.setClusterName(getClusterName());
+        bean.setCompressionType(getCompressionType());
+        bean.setContactPoints(getContactPoints());
+        bean.setLoadBalancingPolicy(getLoadBalancingPolicy());
+        bean.setMaxSchemaAgreementWaitSeconds(getMaxSchemaAgreementWaitSeconds());
+        bean.setMetricsEnabled(getMetricsEnabled());
+        bean.setNettyOptions(getNettyOptions());
+        bean.setPoolingOptions(getPoolingOptions());
+        bean.setPort(getPort());
+        bean.setProtocolVersion(getProtocolVersion());
+        bean.setQueryOptions(getQueryOptions());
+        bean.setReconnectionPolicy(getReconnectionPolicy());
+        bean.setRetryPolicy(getRetryPolicy());
+        bean.setSpeculativeExecutionPolicy(getSpeculativeExecutionPolicy());
+        bean.setSocketOptions(getSocketOptions());
+        bean.setTimestampGenerator(getTimestampGenerator());
+
+        bean.setKeyspaceCreations(getKeyspaceCreations());
+        bean.setKeyspaceDrops(getKeyspaceDrops());
+        bean.setStartupScripts(getStartupScripts());
+        bean.setShutdownScripts(getShutdownScripts());
+
+        return bean;
+    }
+//
+//    @Override
+//    protected String getKeyspaceName() {
+//        return this.KEYSPACE;
+//    }
+
+    @Override
+    protected String getContactPoints() {
+        return hosts;
+    }
+
+    @Override
+    protected boolean getMetricsEnabled() {
+        return false;
+    }
 }

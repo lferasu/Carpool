@@ -1,8 +1,8 @@
-package edu.mum.ea3.auth_service.configs;
+package edu.mum.ea2.auth_service.configs;
 
 
-import edu.mum.ea3.auth_service.entities.UserEntity;
-import edu.mum.ea3.auth_service.repos.UsersRepo;
+import edu.mum.ea2.auth_service.entities.UserEntity;
+import edu.mum.ea2.auth_service.repos.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

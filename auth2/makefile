@@ -25,4 +25,3 @@ k8-delete:
 	kubectl delete -f manifests/
 
 k8-repush-restart: k8-delete docker-push k8-install
-

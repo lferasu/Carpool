@@ -1,11 +1,11 @@
-package edu.mum.ea3.auth_service.controllers;
+package edu.mum.ea2.auth_service.controllers;
 
-import edu.mum.ea3.auth_service.configs.JwtTokenUtil;
-import edu.mum.ea3.auth_service.configs.JwtUserService;
-import edu.mum.ea3.auth_service.entities.UserEntity;
+import edu.mum.ea2.auth_service.configs.JwtTokenUtil;
+import edu.mum.ea2.auth_service.configs.JwtUserService;
+import edu.mum.ea2.auth_service.entities.UserEntity;
 //import edu.mum.ea3.auth_service.models.Messages;
-import edu.mum.ea3.auth_service.models.SignInCredentials;
-import edu.mum.ea3.auth_service.repos.UsersRepo;
+import edu.mum.ea2.auth_service.models.SignInCredentials;
+import edu.mum.ea2.auth_service.repos.UsersRepo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -47,7 +47,7 @@ spec:
                   name: passenger-trip-service-secrets
                   key: PASSENGER_TRIP_KAFKATOPIC
 
-            - name: PASSENGER_TRIP_KAFKAURI
+            - name: passenger_trip_kafkaUri
               valueFrom:
                 secretKeyRef:
                   name: passenger-trip-service-secrets

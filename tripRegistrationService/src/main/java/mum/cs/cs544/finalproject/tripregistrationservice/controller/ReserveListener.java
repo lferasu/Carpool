@@ -35,8 +35,6 @@ public class ReserveListener {
             TripRegistrationTable savedrt = tripRegistrationTableService.saveTrip(tripRegistrationTable);
             publishreservedTripAgain(savedrt);
 
-
-
         }
 
         }

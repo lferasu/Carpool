@@ -1,4 +1,4 @@
-package edu.mum.ea3.auth_service.models;
+package edu.mum.ea2.auth_service.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

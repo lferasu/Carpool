@@ -26,6 +26,7 @@ public class KafkaConfig {
 
     public KafkaConfig(@Value("${passenger.trip.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
         KAFKA_URI = kafka_uri;
+//        KAFKA_URI = "carpoolkafka:9092";
     }
 
 

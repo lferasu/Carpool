@@ -1,4 +1,4 @@
-package edu.mum.ea3.auth_service;
+package edu.mum.ea2.auth_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package edu.mum.ea3.auth_service.configs;
+package edu.mum.ea2.auth_service.configs;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

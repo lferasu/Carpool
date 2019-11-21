@@ -17,11 +17,14 @@
           <li class=" nav-item ">
             <a class=" nav-link" [routerLink]="['trip']">Register A trip </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" [routerLink]="['alltrips']">View myTrip</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['login']">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['alltrips']">Login</a>
+            <a class="nav-link" [routerLink]="['signup']">SignUp</a>
           </li>
         </ul>
       </div>
@@ -31,7 +34,6 @@
   <div class=" jumbotronright">
     <section class="testimonial py-5" id="testimonial">
       <form [formGroup]="searchForm" (ngSubmit)="submitSearchForm()">
-
         <div class="container" style="width: 50vw;">
           <div class="row">
             <div class="col-sm-6">
@@ -78,7 +80,6 @@
             </div>
           </div>
 
-
           <div class="row">
             <div class="col-sm-8">
               <label for="">Date</label>
@@ -92,23 +93,8 @@
               </button>
             </div>
 
-
-
-            <!-- <div class="col-sm-4">
-            <label for="sel1">Driver Gender:</label>
-            <fieldset class="form-group">
-              <select class="selectpicker" formControlName="driverGender">
-                <option formControlName="driverGender">I don't mind</option>
-                <option formControlName="driverGender">Male</option>
-                <option formControlName="driverGender">Gender</option>
-              </select>
-            </fieldset>
-          </div> -->
-
           </div>
         </div>
-
-
       </form>
     </section>
   </div>

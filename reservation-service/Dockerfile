@@ -2,7 +2,7 @@
 FROM docker.io/maven AS build-env
 
 # Set the working directory to /app
-WORKDIR /reservetrip
+WORKDIR /app
 
 # copy the pom.xml file to download dependencies
 COPY pom.xml ./
@@ -21,7 +21,7 @@ RUN mvn -Dmaven.test.skip=true package
 FROM docker.io/openjdk:8-jdk-alpine
 
 # Copy the compiled files over.
-COPY --from=build-env /reservetrip/target /reservetrip/
+COPY --from=build-env /app/target /app/
 
 # Starts java app with debugging server at port 5005.
-ENTRYPOINT ["java", "-jar", "/app/reservetrip-1.0.jar"]
+ENTRYPOINT ["java", "-jar", "/app/reservetrip-0.0.1-SNAPSHOT.jar"]
