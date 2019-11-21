@@ -10,4 +10,5 @@ public interface ReservationTableService {
     Trip tripMapper(ReservationTable rt);
     ReservationTable getReservationData(long userId, long tripId);
     void publish(Trip trip);
+    ReservationTable getReservationByTripId(long tripId);
 }

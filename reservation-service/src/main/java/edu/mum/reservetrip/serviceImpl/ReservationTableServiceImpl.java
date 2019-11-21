@@ -19,7 +19,11 @@ public class ReservationTableServiceImpl implements ReservationTableService {
 
     @Override
     public ReservationTable saveReservation(ReservationTable reservationTable) {
-        return reservationTableRepository.save(reservationTable);
+        reservationTableRepository.save(reservationTable);
+
+       return reservationTableRepository.findByTripId(reservationTable.getTripId());
+
+
     }
 
     @Override
@@ -29,11 +33,11 @@ public class ReservationTableServiceImpl implements ReservationTableService {
         rt.setTripId(trip.getId());
         rt.setUserId(userId);
         //get and save driver
-        rt.setDriverId(trip.getDriver().getId());
-        rt.setDriverEmailAddress(trip.getDriver().getEmailAddress());
-        rt.setDriverFirstName(trip.getDriver().getFirstName());
-        rt.setDriverLastName(trip.getDriver().getLastName());
-        rt.setDriverUsername(trip.getDriver().getUsername());
+//        rt.setDriverId(trip.getDriver().getId());
+//        rt.setDriverEmailAddress(trip.getDriver().getEmailAddress());
+//        rt.setDriverFirstName(trip.getDriver().getFirstName());
+//        rt.setDriverLastName(trip.getDriver().getLastName());
+//        rt.setDriverUsername(trip.getDriver().getUsername());
         //make Reservation
         rt.setNoOfReservedSeats(trip.getRequestedReserveSeat());
         //get the trip
@@ -44,6 +48,7 @@ public class ReservationTableServiceImpl implements ReservationTableService {
         rt.setRoundTrip(trip.isRoundTrip());
         rt.setTripPrice(trip.getTripPrice());
         rt.setTripDescription(trip.getTripDescription());
+        rt.setRequestedReserveSeat(trip.getRequestedReserveSeat());
 
         return rt;
     }
@@ -56,6 +61,11 @@ public class ReservationTableServiceImpl implements ReservationTableService {
 
     public void publish(Trip trip){
         kafkaTemplate.send(kafkaTopic, trip);
+    }
+
+    @Override
+    public ReservationTable getReservationByTripId(long tripId) {
+        return reservationTableRepository.findByTripId(tripId);
     }
 
     @Override
@@ -81,15 +91,15 @@ public class ReservationTableServiceImpl implements ReservationTableService {
         trip.setDriver(driver);
 
         Reservation reservation = new Reservation();
-        reservation.setId(rt.getReservationId());
+//        reservation.setId(rt.getReservationId());
         reservation.setNoOfReservedSeats(rt.getNoOfReservedSeats());
         reservation.setCanceled(rt.isCanceled());
 
         User user = new User();
         user.setId(rt.getUserId());
         //hardcoded values used here for now
-        user.setEmailAddress("xx@xx.xx");
-        user.setUsername("hallo");
+        user.setEmailAddress(rt.getUserEmailAddress());
+        user.setUsername(rt.getUserUsername());
         user.setFirstName(rt.getUserFirstName());
         user.setLastName(rt.getUserLastName());
         reservation.setReservedBy(user);

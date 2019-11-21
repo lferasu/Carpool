@@ -1,0 +1,29 @@
+################################################################################
+# WARNING: This MongoDB deployment is not suitable for production as the data is
+# not persistently stored and will go away every time the Pod restarts. Consider
+# using a Helm chart that provisions a StatefulSet instead of Deployment.
+################################################################################
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: java-trip-register-cassandradb
+  labels:
+    app: java-trip-register
+    tier: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-trip-register
+      tier: db
+  template:
+    metadata:
+      labels:
+        app: java-trip-register
+        tier: db
+    spec:
+      containers:
+        - name: cassandra
+          image: cassandra:3
+          ports:
+            - containerPort: 9042

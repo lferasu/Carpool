@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-trip-register-cassandradb
+  labels:
+    app: java-trip-register
+    tier: db
+spec:
+  ports:
+    - port: 9042
+      targetPort: 9042
+  selector:
+    app: java-trip-register
+    tier: db
