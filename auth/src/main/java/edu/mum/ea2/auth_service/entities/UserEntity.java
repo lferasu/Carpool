@@ -1,4 +1,4 @@
-package edu.mum.ea3.auth_service.entities;
+package edu.mum.ea2.auth_service.entities;
 
 import edu.mum.shared.models.User;
 import lombok.Getter;

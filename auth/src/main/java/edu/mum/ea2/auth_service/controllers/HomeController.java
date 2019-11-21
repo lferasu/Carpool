@@ -1,7 +1,7 @@
-package edu.mum.ea3.auth_service.controllers;
+package edu.mum.ea2.auth_service.controllers;
 
-import edu.mum.ea3.auth_service.entities.UserEntity;
-import edu.mum.ea3.auth_service.repos.UsersRepo;
+import edu.mum.ea2.auth_service.entities.UserEntity;
+import edu.mum.ea2.auth_service.repos.UsersRepo;
 import edu.mum.shared.models.User;
 import edu.mum.shared.utils.EaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
