@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: auth-service-cassandradb
   labels:
-    app: auth_service
+    app: auth-service
     tier: db
 spec:
   ports:
     - port: 9042
       targetPort: 9042
   selector:
-    app: auth_service
+    app: auth-service
     tier: db

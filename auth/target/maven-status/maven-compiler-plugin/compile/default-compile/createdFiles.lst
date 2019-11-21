@@ -1,4 +1,5 @@
 edu/mum/ea2/auth_service/repos/UsersRepo.class
+edu/mum/ea2/auth_service/utils/EaUtils.class
 edu/mum/ea2/auth_service/configs/WebSecurityConfig.class
 edu/mum/ea2/auth_service/entities/UserEntity.class
 edu/mum/ea2/auth_service/models/JwtResponse.class
@@ -10,3 +11,4 @@ edu/mum/ea2/auth_service/controllers/AuthController.class
 edu/mum/ea2/auth_service/Auth_serviceApplication.class
 edu/mum/ea2/auth_service/configs/JwtTokenUtil.class
 edu/mum/ea2/auth_service/configs/JwtUserService.class
+edu/mum/ea2/auth_service/entities/User.class

@@ -27,19 +27,6 @@ spec:
                   key: SPRING_DATA_CASSANDRA_CONTACT-POINTS
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
-
-            - name: AUTH_SERVICE_KAFKATOPIC
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: AUTH_SERVICE_KAFKATOPIC
-
-            - name: AUTH_SERVICE_KAFKAURI
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-secrets
-                  key: AUTH_SERVICE_KAFKAURI
-
             - name: SPRING_DATA_CASSANDRA_CONTACT-POINTS
               valueFrom:
                 secretKeyRef:

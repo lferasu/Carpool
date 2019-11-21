@@ -6,6 +6,8 @@
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/JwtTokenUtil.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/JwtUserService.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/controllers/HomeController.java
+/Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/entities/User.java
+/Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/utils/EaUtils.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/repos/UsersRepo.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/entities/UserEntity.java
 /Users/user/Desktop/MUM/EA-CS544/Projects/Carpool/auth/src/main/java/edu/mum/ea2/auth_service/configs/JwtAuthenticationEntryPoint.java
