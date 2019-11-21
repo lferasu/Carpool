@@ -51,7 +51,7 @@ public class BackendController {
         TripEntity trip = new TripEntity();
         trip.setId(UUID.randomUUID());
         kafkaTemplate.send(TOPIC, trip);
-        return new ResponseEntity<>("products-service. Host: " + host, HttpStatus.OK);
+        return new ResponseEntity<>("passenger-trip-service. Host: " + host, HttpStatus.OK);
     }
 
 
