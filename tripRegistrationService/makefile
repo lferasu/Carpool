@@ -1,16 +1,15 @@
-DOCKERHUBREPO=puje2docker
-IMAGE=${DOCKERHUBREPO}/java-trip-register
-
+DOCKERHUBREPO=shirmen
+IMAGE=${DOCKERHUBREPO}/trip-registration-service
 # ===== Maven =====
 maven-rebuild:
-	mvn clean && mvn install
+	mvn clean && mvn install -Dmaven.test.skip=true
 
 # ===== Docker =====
 docker-build: maven-rebuild
 	docker build -t ${IMAGE} .
 
 docker-run:
-	docker run -p 8080:8081 ${IMAGE}
+	docker run -p 8080:8080 ${IMAGE}
 
 docker-login:
 	docker login
@@ -25,4 +24,3 @@ k8-delete:
 	kubectl delete -f manifests/
 
 k8-repush-restart: k8-delete docker-push k8-install
-
