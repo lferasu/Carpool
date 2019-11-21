@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: puje2docker/auth-service
+#          image: puje2docker/auth-service
+          image: shirmen/auth-service
           imagePullPolicy: Always
           ports:
               - containerPort: 8080

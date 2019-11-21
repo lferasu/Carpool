@@ -1,4 +1,5 @@
-DOCKERHUBREPO=puje2docker
+DOCKERHUBREPO=shirmen
+# DOCKERHUBREPO=puje2docker
 IMAGE=${DOCKERHUBREPO}/auth_service
 
 # ===== Maven =====
