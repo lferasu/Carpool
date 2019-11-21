@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth_service
+  name: auth-service
   labels:
     app: auth_service
 spec:
