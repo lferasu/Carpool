@@ -27,7 +27,7 @@ public class KafakListnerConfig {
         JsonDeserializer<TripData> deserializer = new JsonDeserializer<>(TripData.class);
 
         //deserializer.setRemoveTypeHeaders(false);
-      //  deserializer.addTrustedPackages("*");
+        //deserializer.addTrustedPackages("*");
         //deserializer.setUseTypeMapperForKey(true);
 
         Map<String, Object> config = new HashMap<>();

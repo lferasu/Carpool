@@ -67,6 +67,7 @@ public class QueryDSLService {
 
 	}
 
+    @Cacheable("trip")
     //find places on either of the destination and satring places
 	public List<Trip> multiMatchQuery(String text) {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(text)
@@ -76,6 +77,7 @@ public class QueryDSLService {
 		return users;
     }
 
+    @Cacheable("trip")
     // search result with price range  
     public List<Trip> getPriceRangeSearchData(Double minmiumPrice, Double maximumPrice){
         QueryBuilder query = QueryBuilders.rangeQuery("tripPrice").from(minmiumPrice).to(maximumPrice).includeLower(true).includeUpper(false);
@@ -86,6 +88,7 @@ public class QueryDSLService {
     }
 
 
+    @Cacheable("trip")
     //search avilable seat and destination places 
     public List<Trip> getAvilableSeatANDDestination(Integer numberOfAvilableSeats, String dropOffPlace){
         LocalDate present = LocalDate.now();
@@ -101,6 +104,7 @@ public class QueryDSLService {
     }
 
 
+    @Cacheable("trip")
     // sarch starting, destination and price range values
     public List<Trip> getFromToPriceRnageSearchData(String pickUpPlace, String dropOffPlace, Double intialPrice, Double finalPrice ){
 
@@ -117,6 +121,7 @@ public class QueryDSLService {
     }
 
 
+    @Cacheable("trip")
     // sarch starting, destination and date range values
     public List<Trip> getFromToDateRnageSearchData(String pickUpPlace, String dropOffPlace, String tripStartingTime, String tripEndTime ){
         String str1[] = tripStartingTime.split("-");
