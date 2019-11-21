@@ -1,0 +1,72 @@
+<div style="width: 60vw; margin: auto; " class="border border-primary">
+    <form [formGroup]="signUpForm" (ngSubmit)="submitForm()" class="border border-light">
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-4 py-5 bg-primary text-white text-center ">
+                    <div class=" ">
+                        <div class="card-body">
+                            <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
+                            <h2 class="py-3">Register new Trip</h2>
+                            <p> we will let our customers know about your trip
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 py-5 border">
+                    <h3>Personal Info</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input formControlName="firstName" placeholder="First name"
+                                class="form-control form-control-sm" type="text" required />
+                        </div>
+                        <div class="col-md-6">
+                            <input formControlName="lastName" placeholder="Last name"
+                                class="form-control form-control-sm" type="text" required />
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input formControlName="password" placeholder="password"
+                                class="form-control form-control-sm" type="password" required />
+                        </div>
+                        <div class="col-md-4">
+                            <input formControlName="confirmPassword" placeholder="confirmPassword"
+                                class="form-control form-control-sm" type="password" required />
+                        </div>
+                        <div class="col-md-4"> <input formControlName="email" placeholder="email"
+                                class="form-control form-control-sm" type="email" /></div>
+
+                    </div>
+                    <div class="form-row align-items-center border border-light">
+                        <div class="row">
+                            <div class="col-md-3"> <input formControlName="adrState" placeholder="State"
+                                    class="form-control form-control-sm" type="text" /></div>
+                            <div class="col-md-3"> <input formControlName="adrCity" placeholder="City"
+                                    class="form-control form-control-sm" type="text" /></div>
+                            <div class="col-md-3"><input formControlName="adrStreet" placeholder="Street"
+                                    class="form-control form-control-sm" type="text" /></div>
+                            <div class="col-md-3"><input formControlName="adrZip" placeholder="zip"
+                                    class="form-control form-control-sm" type="text" /></div>
+                        </div>
+
+                        <div class="form-row">
+                            <button type="button" class="btn btn-danger" type="submit">Register</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </form>
+</div>

@@ -1,6 +1,8 @@
 package com.mum.carpool.notificationproducer.mocknotificationproducer;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -97,5 +99,56 @@ public class controller {
 
         System.out.println(t1.toString());
         return Arrays.asList(t1,t2,t3,t4,t5,t6,t7,t8);
+    }
+
+    @GetMapping("/search")
+    public List<Trip> getSearched() {
+
+        Trip t1 = new Trip();
+        Trip t2 = new Trip();
+        Trip t3 = new Trip();
+        Trip t4 = new Trip();
+
+
+        t1.setId(1L);
+        t2.setId(2L);
+        t3.setId(3L);
+        t4.setId(4L);
+
+
+
+
+
+
+        t1.setDropOffPlace("haha");
+        t1.setPickupPlace("hoo");
+
+        t2.setDropOffPlace("haha");
+        t2.setPickupPlace("hoo");
+        t3.setDropOffPlace("haha");
+        t3.setPickupPlace("hoo");
+        t4.setDropOffPlace("haha");
+        t4.setPickupPlace("hoo");
+
+        t1.setTripPrice(20.0);
+        t2.setTripPrice(20.0);t3.setTripPrice(20.0);t4.setTripPrice(20.0);
+        t1.setTripStartingTime(LocalDateTime.now());
+        t2.setTripStartingTime(LocalDateTime.now());
+        t3.setTripStartingTime(LocalDateTime.now());
+        t4.setTripStartingTime(LocalDateTime.now());
+        t1.setNumberOfAvailableSeats(2);
+        t2.setNumberOfAvailableSeats(2);
+        t3.setNumberOfAvailableSeats(2);
+        t4.setNumberOfAvailableSeats(2);
+
+        t1.setTripDescription("this is my description");
+        t2.setTripDescription("this is my description");
+        t3.setTripDescription("this is my description");
+        t4.setTripDescription("this is my description");
+
+
+        /////
+        System.out.println(t1.toString());
+        return Arrays.asList(t1,t2,t3,t4);
     }
 }
