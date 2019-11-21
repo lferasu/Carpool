@@ -1,5 +1,5 @@
 DOCKERHUBREPO=puje2docker
-IMAGE=${DOCKERHUBREPO}/auth_service
+IMAGE=${DOCKERHUBREPO}/auth-service
 
 # ===== Maven =====
 maven-rebuild:
