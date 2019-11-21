@@ -1,4 +1,4 @@
-DOCKERHUBREPO=shirmen
+DOCKERHUBREPO=puje2docker
 # DOCKERHUBREPO=puje2docker
 IMAGE=${DOCKERHUBREPO}/auth-service
 
