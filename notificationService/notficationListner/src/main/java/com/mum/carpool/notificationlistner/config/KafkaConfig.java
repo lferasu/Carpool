@@ -18,8 +18,8 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
-    @Value("${kafka.bootstrap.servers}")
-    String kafkaAdress;
+//    @Value("${kafka.bootstrap.servers}")
+//    String kafkaAdress;
     private final String KAFKA_URI;
 
     public KafkaConfig(@Value("${notfication.service.kafkaUri: 127.0.0.1:9092}") String kafka_uri) {
