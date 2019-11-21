@@ -1,6 +1,5 @@
 DOCKERHUBREPO=puje2docker
-IMAGE=${DOCKERHUBREPO}/auth_service
-
+IMAGE=${DOCKERHUBREPO}/auth-service
 # ===== Maven =====
 maven-rebuild:
 	mvn clean && mvn install
@@ -10,7 +9,7 @@ docker-build: maven-rebuild
 	docker build -t ${IMAGE} .
 
 docker-run:
-	docker run -p 8080:8081 ${IMAGE}
+	docker run -p 8080:8080 ${IMAGE}
 
 docker-login:
 	docker login
@@ -25,4 +24,3 @@ k8-delete:
 	kubectl delete -f manifests/
 
 k8-repush-restart: k8-delete docker-push k8-install
-
