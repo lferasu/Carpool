@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 //import javax.persistence.*;
 
@@ -14,7 +15,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 @Setter
 //@Entity
 @ToString
-//@Table(name = "Users")
+@Table("user")
 public class UserEntity {
 
 //    @Id
