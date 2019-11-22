@@ -17,6 +17,10 @@ spec:
           imagePullPolicy: Always
           ports:
               - containerPort: 8080
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/ash", "-c", "echo '10.70.0.185     carpoolkafka-0.carpoolkafka.default.svc.cluster.local' >> /etc/hosts"]
           env:
             - name: PORT
               value: "8080"

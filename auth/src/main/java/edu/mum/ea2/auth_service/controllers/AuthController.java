@@ -4,6 +4,7 @@ import edu.mum.ea2.auth_service.configs.JwtTokenUtil;
 import edu.mum.ea2.auth_service.configs.JwtUserService;
 import edu.mum.ea2.auth_service.entities.UserEntity;
 //import edu.mum.ea3.auth_service.models.Messages;
+import edu.mum.ea2.auth_service.models.JwtResponse;
 import edu.mum.ea2.auth_service.models.SignInCredentials;
 import edu.mum.ea2.auth_service.repos.UsersRepo;
 import lombok.extern.log4j.Log4j2;
@@ -25,10 +26,10 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.Random;
 
-@CrossOrigin("*")
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/auth")
 @Log4j2
 public class AuthController {
@@ -65,14 +66,13 @@ public class AuthController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<String> saveUser(@RequestBody UserEntity user) throws Exception {
-
-		user.setId(UUID.randomUUID());
-
+	public ResponseEntity<JwtResponse> saveUser(@RequestBody UserEntity user) throws Exception {
+		int i = new Random().nextInt(900000) + 100000;
+		user.setId(i);
 		user.setPassword(bcryptEncoder.encode(user.getPassword()));
 		usersRepo.save(user);
-		return new ResponseEntity<String>("User added successfully",HttpStatus.OK);
 		//return ResponseEntity.ok("User added successfully");
+		return new ResponseEntity<JwtResponse>(new JwtResponse("User added successfully"), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllUsers")
@@ -84,7 +84,7 @@ public class AuthController {
 	}
 
 	@PostMapping(value = "/sign-in")
-	public ResponseEntity<String> singIn(@RequestBody SignInCredentials signInCredentials) throws Exception {
+	public ResponseEntity<JwtResponse> singIn(@RequestBody SignInCredentials signInCredentials) throws Exception {
 		try {
 			log.info("==sign-in=={}{}",signInCredentials.getEmail(), signInCredentials.getPassword());
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInCredentials.getEmail(), signInCredentials.getPassword()));
@@ -98,10 +98,8 @@ public class AuthController {
 
 		log.info("Garaad irlee");
 
-//		final UserDetails userDetails = userDetailsService.loadUserByUsername(signInCredentials.getEmail());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(signInCredentials.getEmail());
-
-//		log.info("userDetails = {}", userDetails);
+		log.info("userDetails = {}", userDetails);
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 //		Messages messages = new Messages();
@@ -110,8 +108,10 @@ public class AuthController {
 //		kafkaTemplate.send(TOPIC, messages);
 
 		//kafkaTemplate.send(TOPIC, new Messages(token, usersRepo.findByEmail(signInCredentials.getEmail()).getId())
-
-		return ResponseEntity.ok(token);
+		System.out.println("=====Successfull=====");
+		//return ResponseEntity.ok(token);
+		//return new ResponseEntity.ok(new JwtResponse(token));
+		return new ResponseEntity<JwtResponse>(new JwtResponse(token), HttpStatus.OK);
 	}
 
 
@@ -122,7 +122,7 @@ public class AuthController {
 //		//kafkaTemplate.send(TOPIC, new Messages(msg.getToken(), msg.getUserId()));
 //		kafkaTemplate.send(TOPIC, messages);
 //		return "Published Successfully";
-//	}
+///	}
 
 
 

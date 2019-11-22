@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
 
     // console.log(loginUser);
     this.authService.login(this.loginForm.value).subscribe(data => {
-
       console.log("loggedIn");
       this.response = <Response>data;
       localStorage.setItem('ACCESS_TOKEN', <string>this.response.accessToken);
@@ -60,6 +59,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/alltrips'])
     },
       err => {
+        console.log("refused");
         console.log(err);
       });
 

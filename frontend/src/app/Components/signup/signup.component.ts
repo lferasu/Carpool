@@ -40,6 +40,7 @@ export class SignupComponent implements OnInit {
     user = <User>this.signUpForm.value;
     console.log(user);
     this.authService.registerUser(user).subscribe(data => {
+      console.log("succ");
       this.swal("User Registered!", "", "success");
       this.router.navigate(['alltrips']);
     },
@@ -48,6 +49,7 @@ export class SignupComponent implements OnInit {
           this.swal("User Registered!", "", "success");
         }
         console.log(err);
+        console.log("err");
       })
   }
 }

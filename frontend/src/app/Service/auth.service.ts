@@ -9,7 +9,7 @@ import { Login } from '../Model/Login';
 })
 export class AuthService {
   loggedInUser: User
-  url = "172.19.142.217:9789"
+  url = "172.19.142.69:9789"
 
   constructor(private httpClient: HttpClient) {
 

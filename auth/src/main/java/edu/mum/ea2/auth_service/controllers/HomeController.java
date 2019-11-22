@@ -1,16 +1,9 @@
 package edu.mum.ea2.auth_service.controllers;
 
-<<<<<<< HEAD:auth2/src/main/java/edu/mum/ea3/auth_service/controllers/HomeController.java
-import edu.mum.ea3.auth_service.entities.UserEntity;
-import edu.mum.ea3.auth_service.repos.UsersRepo;
-//import edu.mum.shared.models.User;
-//import edu.mum.shared.utils.EaUtils;
-=======
+import edu.mum.ea2.auth_service.entities.User;
 import edu.mum.ea2.auth_service.entities.UserEntity;
 import edu.mum.ea2.auth_service.repos.UsersRepo;
-import edu.mum.shared.models.User;
-import edu.mum.shared.utils.EaUtils;
->>>>>>> 19678fa99308909681f623056ba719e258900b07:auth/src/main/java/edu/mum/ea2/auth_service/controllers/HomeController.java
+import edu.mum.ea2.auth_service.utils.EaUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -48,9 +41,9 @@ public class HomeController {
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<UserEntity> getUserInfo(@PathVariable(name = "id") int id, HttpServletRequest request) {
-//		if (!EaUtils.isServiceAuthorized(request, serviceSecret))
-//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+	public ResponseEntity<User> getUserInfo(@PathVariable(name = "id") int id, HttpServletRequest request) {
+		if (!EaUtils.isServiceAuthorized(request, serviceSecret))
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
 		UserEntity entity = usersRepo.findById(id);
 
